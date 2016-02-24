@@ -113,7 +113,7 @@ testFile2 (const char fileName[], bool exists, bool exrFile, bool tiledFile)
 
     std::cout << (exists? "exists": "does not exist") << ", " <<
 	    (exrFile? "is an OpenEXR file": "is not an OpenEXR file") << ", " <<
-	    (tiledFile? "is tiled": "is not tiled") << endl;
+	    (tiledFile? "is tiled": "is not tiled") << std::endl;
 }
 
 } // namespace
@@ -124,7 +124,7 @@ testMagic (const std::string &)
 {
     try
     {
-	std::cout << "Testing magic number" << endl;
+	std::cout << "Testing magic number" << std::endl;
 
 	testFile1 (ILM_IMF_TEST_IMAGEDIR "comp_none.exr", true);
 	testFile1 (ILM_IMF_TEST_IMAGEDIR "invalid.exr", false);
@@ -134,11 +134,11 @@ testMagic (const std::string &)
 	testFile2 (ILM_IMF_TEST_IMAGEDIR "invalid.exr", true, false, false);
 	testFile2 (ILM_IMF_TEST_IMAGEDIR "does_not_exist.exr", false, false, false);
 
-	std::cout << "ok\n" << endl;
+	std::cout << "ok\n" << std::endl;
     }
     catch (const std::exception &e)
     {
-	std::cerr << "ERROR -- caught exception: " << e.what() << endl;
+	std::cerr << "ERROR -- caught exception: " << e.what() << std::endl;
 	assert (false);
     }
 }
