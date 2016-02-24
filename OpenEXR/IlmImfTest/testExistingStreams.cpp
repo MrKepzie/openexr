@@ -330,7 +330,7 @@ writeReadMultiPart (const char fileName[],
                         
     std::cout << "scan-line based mulitpart file:" << std::endl;
                         
-    vector<Header> headers(2);
+    std::vector<Header> headers(2);
     headers[0] = Header(width, height);
     headers[0].setName("part1");
     headers[0].channels().insert("R",Channel());
