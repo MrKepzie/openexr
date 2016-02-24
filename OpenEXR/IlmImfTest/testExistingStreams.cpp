@@ -53,7 +53,6 @@
 
 
 using namespace OPENEXR_IMF_NAMESPACE;
-using namespace std;
 using namespace IMATH_NAMESPACE;
 
 namespace {
@@ -231,12 +230,12 @@ writeReadScanLines (const char fileName[],
     // MMIFStream (see above).
     //
 
-    cout << "scan-line based file:" << endl;
+    std::cout << "scan-line based file:" << std::endl;
 
     Header header (width, height);
 
     {
-        cout << "writing";
+        std::cout << "writing";
 	remove (fileName);
 	OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (filenameStr, ios_base::binary);
 	StdOFStream ofs (os, fileName);
@@ -246,7 +245,7 @@ writeReadScanLines (const char fileName[],
     }
 
     {
-        cout << ", reading";
+        std::cout << ", reading";
 
 	OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (filenameStr, ios_base::binary);
 	StdIFStream ifs (is, fileName);
@@ -262,7 +261,7 @@ writeReadScanLines (const char fileName[],
 	in.setFrameBuffer (&p2[-dy][-dx], 1, w);
 	in.readPixels (dw.min.y, dw.max.y);
 
-        cout << ", comparing";
+        std::cout << ", comparing";
 	for (int y = 0; y < h; ++y)
 	{
 	    for (int x = 0; x < w; ++x)
@@ -276,7 +275,7 @@ writeReadScanLines (const char fileName[],
     }
     
     {
-        cout << ", reading (memory-mapped)";
+        std::cout << ", reading (memory-mapped)";
 	MMIFStream ifs (fileName);
 	RgbaInputFile in (ifs);
 
@@ -290,7 +289,7 @@ writeReadScanLines (const char fileName[],
 	in.setFrameBuffer (&p2[-dy][-dx], 1, w);
 	in.readPixels (dw.min.y, dw.max.y);
 
-        cout << ", comparing";
+        std::cout << ", comparing";
 	for (int y = 0; y < h; ++y)
 	{
 	    for (int x = 0; x < w; ++x)
@@ -303,7 +302,7 @@ writeReadScanLines (const char fileName[],
 	}
     }
     
-    cout << endl;
+    std::cout << std::endl;
 
     remove (fileName);
 }
@@ -329,7 +328,7 @@ writeReadMultiPart (const char fileName[],
     // MMIFStream (see above).
     //
                         
-    cout << "scan-line based mulitpart file:" << endl;
+    std::cout << "scan-line based mulitpart file:" << std::endl;
                         
     vector<Header> headers(2);
     headers[0] = Header(width, height);
@@ -345,7 +344,7 @@ writeReadMultiPart (const char fileName[],
     
     
     {
-        cout << "writing";
+        std::cout << "writing";
         remove (fileName);
         OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (filenameStr, ios_base::binary);
         StdOFStream ofs (os, fileName);
@@ -365,7 +364,7 @@ writeReadMultiPart (const char fileName[],
     }
                         
     {
-        cout << ", reading";
+        std::cout << ", reading";
         OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (filenameStr, ios_base::binary);
         StdIFStream ifs (is, fileName);
         MultiPartInputFile in (ifs);
@@ -393,7 +392,7 @@ writeReadMultiPart (const char fileName[],
             p.setFrameBuffer(f);
             p.readPixels (dw.min.y, dw.max.y);
                             
-            cout << ", comparing pt " << part;
+            std::cout << ", comparing pt " << part;
             for (int y = 0; y < h; ++y)
             {
                 for (int x = 0; x < w; ++x)
@@ -408,7 +407,7 @@ writeReadMultiPart (const char fileName[],
     }
     
     {
-        cout << ", reading (memory-mapped)";
+        std::cout << ", reading (memory-mapped)";
         MMIFStream ifs (fileName);
         MultiPartInputFile in (ifs);
         
@@ -436,7 +435,7 @@ writeReadMultiPart (const char fileName[],
             p.setFrameBuffer(f);
             p.readPixels (dw.min.y, dw.max.y);
             
-            cout << ", comparing pt " << part;
+            std::cout << ", comparing pt " << part;
             for (int y = 0; y < h; ++y)
             {
                 for (int x = 0; x < w; ++x)
@@ -450,7 +449,7 @@ writeReadMultiPart (const char fileName[],
         }
     }
     
-    cout << endl;
+    std::cout << std::endl;
                         
     remove (fileName);
 }
@@ -477,12 +476,12 @@ writeReadTiles (const char fileName[],
     // second time using a memory-mapped MMIFStream (see above).
     //
 
-    cout << "tiled file:" << endl;
+    std::cout << "tiled file:" << std::endl;
 
     Header header (width, height);
 
     {
-        cout << "writing";
+        std::cout << "writing";
 	remove (fileName);
 	OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (filenameStr, ios_base::binary);
 	StdOFStream ofs (os, fileName);
@@ -492,7 +491,7 @@ writeReadTiles (const char fileName[],
     }
 
     {
-        cout << ", reading";
+        std::cout << ", reading";
 	OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (filenameStr, ios_base::binary);
 	StdIFStream ifs (is, fileName);
 	TiledRgbaInputFile in (ifs);
@@ -507,7 +506,7 @@ writeReadTiles (const char fileName[],
 	in.setFrameBuffer (&p2[-dy][-dx], 1, w);
         in.readTiles (0, in.numXTiles() - 1, 0, in.numYTiles() - 1);
 
-        cout << ", comparing";
+        std::cout << ", comparing";
 	for (int y = 0; y < h; ++y)
 	{
 	    for (int x = 0; x < w; ++x)
@@ -521,7 +520,7 @@ writeReadTiles (const char fileName[],
     }
     
     {
-        cout << ", reading (memory-mapped)";
+        std::cout << ", reading (memory-mapped)";
 	MMIFStream ifs (fileName);
 	TiledRgbaInputFile in (ifs);
 
@@ -535,7 +534,7 @@ writeReadTiles (const char fileName[],
 	in.setFrameBuffer (&p2[-dy][-dx], 1, w);
         in.readTiles (0, in.numXTiles() - 1, 0, in.numYTiles() - 1);
 
-        cout << ", comparing";
+        std::cout << ", comparing";
 	for (int y = 0; y < h; ++y)
 	{
 	    for (int x = 0; x < w; ++x)
@@ -548,7 +547,7 @@ writeReadTiles (const char fileName[],
 	}
     }
     
-    cout << endl;
+    std::cout << std::endl;
 
     remove (fileName);
 }
@@ -562,7 +561,7 @@ testExistingStreams (const std::string &tempDir)
 {
     try
     {
-	cout << "Testing reading and writing using existing streams" << endl;
+	std::cout << "Testing reading and writing using existing streams" << std::endl;
 
 	const int W = 119;
 	const int H = 237;
@@ -578,11 +577,11 @@ testExistingStreams (const std::string &tempDir)
     fillPixels1 (p1, W, H);
     writeReadMultiPart ((tempDir +  "imf_test_streams3.exr").c_str(), W, H, p1);
 
-	cout << "ok\n" << endl;
+	std::cout << "ok\n" << std::endl;
     }
     catch (const std::exception &e)
     {
-	cerr << "ERROR -- caught exception: " << e.what() << endl;
+	cerr << "ERROR -- caught exception: " << e.what() << std::endl;
 	assert (false);
     }
 }
