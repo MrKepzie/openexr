@@ -120,9 +120,9 @@ StdIFStream::StdIFStream (const char fileName[]):
 {
 #ifdef _WIN32
 	std::wstring wfilename = StrUtils::utf8_to_utf16(std::string(fileName));
-	_is = new OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream (wfilename, std::ios_base::binary)
+	_is = new OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream (wfilename, std::ios_base::binary);
 #else
-	_is = new OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream (fileName, std::ios_base::binary)
+	_is = new OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream (fileName, std::ios_base::binary);
 #endif
 
     if (!*_is)
@@ -190,9 +190,9 @@ StdOFStream::StdOFStream (const char fileName[]):
 {
 #ifdef _WIN32
 	std::wstring wfilename = StrUtils::utf8_to_utf16(std::string(fileName));
-	_os = new OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream (wfilename, std::ios_base::binary)
+	_os = new OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream (wfilename, std::ios_base::binary);
 #else
-	_os = new OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream (fileName, std::ios_base::binary)
+	_os = new OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream (fileName, std::ios_base::binary);
 #endif
     if (!*_os)
     {
