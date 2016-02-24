@@ -33,6 +33,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 
+#include <ImfStdIO.h>
 #include <ImfRgbaFile.h>
 #include <ImfArray.h>
 #include <ImfPreviewImage.h>
