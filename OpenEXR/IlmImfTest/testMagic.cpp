@@ -60,7 +60,7 @@ testFile1 (const char fileName[], bool isImfFile)
 #else
 	std::string filenameStr(fileName);
 #endif
-    OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream f (filenameStr, ios_base::binary);
+    OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream f (filenameStr, std::ios_base::binary);
     assert (!!f);
 
     char bytes[4];

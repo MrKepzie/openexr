@@ -140,7 +140,7 @@ MMIFStream::MMIFStream (const char fileName[]):
 #else
 	std::string filenameStr(fileName);
 #endif
-    OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream ifs (filenameStr, ios_base::binary);
+    OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream ifs (filenameStr, std::ios_base::binary);
 
     //
     // Get length of file
@@ -237,7 +237,7 @@ writeReadScanLines (const char fileName[],
     {
         std::cout << "writing";
 	remove (fileName);
-	OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (filenameStr, ios_base::binary);
+	OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (filenameStr, std::ios_base::binary);
 	StdOFStream ofs (os, fileName);
 	RgbaOutputFile out (ofs, header, WRITE_RGBA);
 	out.setFrameBuffer (&p1[0][0], 1, width);
@@ -247,7 +247,7 @@ writeReadScanLines (const char fileName[],
     {
         std::cout << ", reading";
 
-	OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (filenameStr, ios_base::binary);
+	OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (filenameStr, std::ios_base::binary);
 	StdIFStream ifs (is, fileName);
 	RgbaInputFile in (ifs);
 
@@ -346,7 +346,7 @@ writeReadMultiPart (const char fileName[],
     {
         std::cout << "writing";
         remove (fileName);
-        OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (filenameStr, ios_base::binary);
+        OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (filenameStr, std::ios_base::binary);
         StdOFStream ofs (os, fileName);
         MultiPartOutputFile out (ofs, &headers[0],2);
         FrameBuffer f;
@@ -365,7 +365,7 @@ writeReadMultiPart (const char fileName[],
                         
     {
         std::cout << ", reading";
-        OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (filenameStr, ios_base::binary);
+        OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (filenameStr, std::ios_base::binary);
         StdIFStream ifs (is, fileName);
         MultiPartInputFile in (ifs);
         
@@ -483,7 +483,7 @@ writeReadTiles (const char fileName[],
     {
         std::cout << "writing";
 	remove (fileName);
-	OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (filenameStr, ios_base::binary);
+	OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (filenameStr, std::ios_base::binary);
 	StdOFStream ofs (os, fileName);
 	TiledRgbaOutputFile out (ofs, header, WRITE_RGBA, 20, 20, ONE_LEVEL);
 	out.setFrameBuffer (&p1[0][0], 1, width);
@@ -492,7 +492,7 @@ writeReadTiles (const char fileName[],
 
     {
         std::cout << ", reading";
-	OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (filenameStr, ios_base::binary);
+	OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (filenameStr, std::ios_base::binary);
 	StdIFStream ifs (is, fileName);
 	TiledRgbaInputFile in (ifs);
 

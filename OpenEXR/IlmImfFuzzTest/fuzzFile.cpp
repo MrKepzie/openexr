@@ -66,7 +66,7 @@ lengthOfFile (const char fileName[])
     if (!ifs)
 	return 0;
 
-    ifs.seekg (0, ios_base::end);
+    ifs.seekg (0, std::ios_base::end);
     return ifs.tellg();
 }
 
