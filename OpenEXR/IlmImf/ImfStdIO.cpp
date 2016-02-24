@@ -43,7 +43,9 @@
 #include <ImfStdIO.h>
 #include "Iex.h"
 #include <errno.h>
-
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include "ImfNamespace.h"
 
 OPENEXR_IMF_INTERNAL_NAMESPACE_SOURCE_ENTER
