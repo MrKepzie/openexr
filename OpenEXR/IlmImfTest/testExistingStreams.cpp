@@ -146,9 +146,9 @@ MMIFStream::MMIFStream (const char fileName[]):
     // Get length of file
     //
 
-    ifs.seekg (0, ios::end);
+    ifs.seekg (0, std::ios::end);
     _length = ifs.tellg();
-    ifs.seekg (0, ios::beg);
+    ifs.seekg (0, std::ios::beg);
     
     //
     // Allocate memory
