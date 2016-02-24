@@ -581,7 +581,7 @@ testExistingStreams (const std::string &tempDir)
     }
     catch (const std::exception &e)
     {
-	cerr << "ERROR -- caught exception: " << e.what() << std::endl;
+	std::cerr << "ERROR -- caught exception: " << e.what() << std::endl;
 	assert (false);
     }
 }
