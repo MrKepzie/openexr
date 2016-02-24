@@ -73,7 +73,7 @@ clearError ()
 
 
 bool
-checkError (std::istream &is, streamsize expected = 0)
+checkError (std::istream &is, std::streamsize expected = 0)
 {
     if (!is)
     {
