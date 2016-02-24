@@ -77,7 +77,7 @@ namespace StrUtils {
 // This is useful on Windows to correctly handle UTF-8 encoded std::string filenames 
 // passed to ifstream/ofstream
 //-------------------------------------------
-std::wstring utf8_to_utf16 (const std::string& str);
+IMF_EXPORT std::wstring utf8_to_utf16 (const std::string& str);
 
 } // namespace StrUtils
 #endif // _WIN32
