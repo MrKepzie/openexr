@@ -136,7 +136,12 @@ MMIFStream::MMIFStream (const char fileName[]):
     _length (0),
     _pos (0)
 {
-    OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream ifs (fileName, ios_base::binary);
+#ifdef _WIN32
+	std::wstring filenameStr = StrUtils::utf8_to_utf16(std::string(fileName));
+#else
+	std::string filenameStr(fileName);
+#endif
+    OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream ifs (filenameStr, ios_base::binary);
 
     //
     // Get length of file
@@ -209,6 +214,12 @@ writeReadScanLines (const char fileName[],
 		    int height,
 		    const Array2D<Rgba> &p1)
 {
+#ifdef _WIN32
+	std::wstring filenameStr = StrUtils::utf8_to_utf16(std::string(fileName));
+#else
+	std::string filenameStr(fileName);
+#endif
+
     //
     // Save a scanline-based RGBA image, but instead of
     // letting the RgbaOutputFile object open the file,
@@ -227,7 +238,7 @@ writeReadScanLines (const char fileName[],
     {
         cout << "writing";
 	remove (fileName);
-	OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (fileName, ios_base::binary);
+	OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (filenameStr, ios_base::binary);
 	StdOFStream ofs (os, fileName);
 	RgbaOutputFile out (ofs, header, WRITE_RGBA);
 	out.setFrameBuffer (&p1[0][0], 1, width);
@@ -236,7 +247,8 @@ writeReadScanLines (const char fileName[],
 
     {
         cout << ", reading";
-	OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (fileName, ios_base::binary);
+
+	OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (filenameStr, ios_base::binary);
 	StdIFStream ifs (is, fileName);
 	RgbaInputFile in (ifs);
 
@@ -301,6 +313,11 @@ writeReadMultiPart (const char fileName[],
                     int height,
                     const Array2D<Rgba> &p1)
 {
+#ifdef _WIN32
+	std::wstring filenameStr = StrUtils::utf8_to_utf16(std::string(fileName));
+#else
+	std::string filenameStr(fileName);
+#endif
     //
     // Save a two scanline parts in an image, but instead of
     // letting the MultiPartOutputFile object open the file,
@@ -330,7 +347,7 @@ writeReadMultiPart (const char fileName[],
     {
         cout << "writing";
         remove (fileName);
-        OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (fileName, ios_base::binary);
+        OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (filenameStr, ios_base::binary);
         StdOFStream ofs (os, fileName);
         MultiPartOutputFile out (ofs, &headers[0],2);
         FrameBuffer f;
@@ -349,7 +366,7 @@ writeReadMultiPart (const char fileName[],
                         
     {
         cout << ", reading";
-        OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (fileName, ios_base::binary);
+        OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (filenameStr, ios_base::binary);
         StdIFStream ifs (is, fileName);
         MultiPartInputFile in (ifs);
         
@@ -446,6 +463,11 @@ writeReadTiles (const char fileName[],
 		int height,
 		const Array2D<Rgba> &p1)
 {
+#ifdef _WIN32
+	std::wstring filenameStr = StrUtils::utf8_to_utf16(std::string(fileName));
+#else
+	std::string filenameStr(fileName);
+#endif
     //
     // Save a tiled RGBA image, but instead of letting
     // the TiledRgbaOutputFile object open the file, make
@@ -462,7 +484,7 @@ writeReadTiles (const char fileName[],
     {
         cout << "writing";
 	remove (fileName);
-	OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (fileName, ios_base::binary);
+	OPENEXR_IMF_INTERNAL_NAMESPACE::ofstream os (filenameStr, ios_base::binary);
 	StdOFStream ofs (os, fileName);
 	TiledRgbaOutputFile out (ofs, header, WRITE_RGBA, 20, 20, ONE_LEVEL);
 	out.setFrameBuffer (&p1[0][0], 1, width);
@@ -471,7 +493,7 @@ writeReadTiles (const char fileName[],
 
     {
         cout << ", reading";
-	OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (fileName, ios_base::binary);
+	OPENEXR_IMF_INTERNAL_NAMESPACE::ifstream is (filenameStr, ios_base::binary);
 	StdIFStream ifs (is, fileName);
 	TiledRgbaInputFile in (ifs);
 

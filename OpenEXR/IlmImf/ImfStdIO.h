@@ -70,6 +70,18 @@ typedef std::ifstream ifstream;
 typedef std::ofstream ofstream;
 #endif //FSTREAM_USE_STDIO_FILEBUF
 
+#ifdef _WIN32
+namespace StrUtils {
+//-------------------------------------------
+// Converts a UTF-8 encoded string into a UTF-16 encoded wide string.
+// This is useful on Windows to correctly handle UTF-8 encoded std::string filenames 
+// passed to ifstream/ofstream
+//-------------------------------------------
+std::wstring utf8_to_utf16 (const std::string& str);
+
+} // namespace StrUtils
+#endif // _WIN32
+
 //-------------------------------------------
 // class StdIFStream -- an implementation of
 // class OPENEXR_IMF_INTERNAL_NAMESPACE::IStream based on class std::ifstream

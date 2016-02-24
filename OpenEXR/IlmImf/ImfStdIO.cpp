@@ -50,9 +50,10 @@
 
 OPENEXR_IMF_INTERNAL_NAMESPACE_SOURCE_ENTER
 
-namespace {
-
 #ifdef _WIN32
+
+namespace StrUtils {
+
 std::wstring
 utf8_to_utf16 (const std::string& str)
 {
@@ -63,7 +64,12 @@ utf8_to_utf16 (const std::string& str)
 
     return native;
 }
+
+}
+
 #endif // _WIN32
+
+namespace {
 
 void
 clearError ()
